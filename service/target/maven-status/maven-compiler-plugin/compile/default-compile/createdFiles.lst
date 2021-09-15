@@ -1,0 +1,6 @@
+org\example\Student\Student.class
+org\example\SpringDemoApplication.class
+org\example\Student\StudentService.class
+org\example\Student\StudentConfig.class
+org\example\Student\StudentController.class
+org\example\Student\StudentRepository.class

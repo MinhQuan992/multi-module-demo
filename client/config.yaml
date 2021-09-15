@@ -1,0 +1,4 @@
+parentGroupId: "org.example"
+parentArtifactId: "MultiModuleDemo"
+parentVersion: "1.0-SNAPSHOT"
+groupId: "org.example"

@@ -1,0 +1,112 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- description: Generated server url
+  url: http://localhost:8080
+paths:
+  /api/v1/student/{studentId}:
+    delete:
+      operationId: deleteStudent
+      parameters:
+      - explode: false
+        in: path
+        name: studentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: OK
+      tags:
+      - student-controller
+      x-accepts: application/json
+    put:
+      operationId: updateStudent
+      parameters:
+      - explode: false
+        in: path
+        name: studentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: OK
+      tags:
+      - student-controller
+      x-accepts: application/json
+  /api/v1/student:
+    get:
+      operationId: getStudents
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Student'
+                type: array
+          description: OK
+      tags:
+      - student-controller
+      x-accepts: '*/*'
+    post:
+      operationId: registerNewStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "200":
+          description: OK
+      tags:
+      - student-controller
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    Student:
+      example:
+        dob: 2000-01-23
+        name: name
+        id: 0
+        email: email
+        age: 6
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        dob:
+          format: date
+          type: string
+        email:
+          type: string
+        age:
+          format: int32
+          type: integer
+      type: object
+
