@@ -7,7 +7,7 @@
 
 ## 2. Create new modules
 
-- Add this line in file pom.xml:
+- Add this line in file pom.xml of the ROOT project:
   ```xml
   <packaging>pom</packaging>
   ```
@@ -15,7 +15,7 @@
   ```shell
   mvn archetype:generate -DgroupId="<your group id>"  -DartifactId="<your module name>" -DarchetypeArtifactId="maven-archetype-quickstart"
   ```
-- Because a project in the service module is Spring Boot project, we need to define parent for ROOT project like this:
+- Because a project in the service module is a Spring Boot project, we need to define parent for the ROOT project like this:
   ```xml
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -28,7 +28,7 @@
 ### 2.1. Service Module
 
 - This is a Spring Boot project. Add necessary dependencies in pom.xml of this module and start writing codes.
-- We need to generate a document for these APIs. We use **springdoc-open-api** to do this.
+- We need to generate a document for these APIs. We use [springdoc-openapi](https://www.baeldung.com/spring-rest-openapi-documentation) to do this.
   ```xml
     <dependency>
       <groupId>org.springdoc</groupId>
@@ -83,12 +83,12 @@
 
 ### 2.2. Java Client (in folder ROOT/client)
 
-- After generating APIs' documents, we generate Java client by using [openapi-generator-cli](https://openapi-generator.tech/docs/usage/#generate) with configurations in file **config.yaml**:
+- After generating APIs' documents, we generate Java client by using [openapi-generator-cli](https://openapi-generator.tech/docs/usage/#generate) with [configurations](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/java.md) in file **config.yaml**:
   ```shell
   openapi-generator-cli generate -i openapi.json -g java -o source -c config.yaml
   ```
 - After generating successfully, we right click on file pom.xml, then choose _Add as Maven Project_.
-- In file pom.xml of this client project, we add a relative path to parent pom by using ralativePath tag inside of parent tag:
+- In file pom.xml of this client project, we add a relative path to parent pom by using _ralativePath_ tag inside of _parent_ tag:
   ```xml
   <relativePath>../../pom.xml</relativePath>
   ```
@@ -111,4 +111,5 @@
       <version>v0</version>
     </dependency>
   ```
-- Then, we can import Java client module in App.java to use. Remember to run the service module before running App.java.
+- Then, we can import Java client module in App.java to use.
+- **IMPORTANT NOTE**: Remember to run the service module before running App.java.
